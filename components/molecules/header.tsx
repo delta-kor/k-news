@@ -23,7 +23,7 @@ const Icon = styled.div`
 
 const Content = styled(motion.p)`
   position: absolute;
-  width: 260px;
+  max-width: 260px;
   height: 35px;
   left: 91px;
   top: 29px;
