@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { AnimateSharedLayout } from 'framer-motion';
 import '../styles/global.sass';
 
 export default function NextApp({ Component, pageProps }: AppProps) {
@@ -11,7 +12,9 @@ export default function NextApp({ Component, pageProps }: AppProps) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
       </Head>
-      <Component {...pageProps} />
+      <AnimateSharedLayout>
+        <Component {...pageProps} />
+      </AnimateSharedLayout>
     </>
   );
 }
