@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { NextPage } from 'next';
 import styled from 'styled-components';
 import Link from 'next/link';
 
@@ -9,6 +10,10 @@ const Background = styled(motion.div)`
   left: 0;
   right: 0;
   background: #2d7ff9;
+
+  @media only screen and (max-height: 710px) {
+    zoom: 0.8;
+  }
 `;
 
 const Logo = styled(motion.img)`
@@ -16,7 +21,7 @@ const Logo = styled(motion.img)`
   width: 67.36px;
   height: 58.69px;
   left: calc(50% - 67.36px / 2 + 0.18px);
-  top: 128px;
+  top: calc(50% - 58.69px / 2 - 248.65px);
 `;
 
 const Title = styled(motion.h1)`
@@ -24,7 +29,7 @@ const Title = styled(motion.h1)`
   width: 167px;
   height: 60px;
   left: calc(50% - 167px / 2);
-  top: 212px;
+  top: calc(50% - 60px / 2 - 164px);
   font-style: normal;
   font-weight: bold;
   font-size: 48px;
@@ -35,11 +40,10 @@ const Title = styled(motion.h1)`
 
 const MenuList = styled.div`
   position: absolute;
-  padding: 8px;
   height: 368px;
   left: 0;
   right: 0;
-  top: 316px;
+  top: calc(50% - 368px / 2 + 94px);
 `;
 
 const MenuItem = styled(motion.div)<{ active?: boolean }>`
@@ -69,7 +73,7 @@ const menuData: MenuData[] = [
   { title: 'IT', href: '/it' },
 ];
 
-export default function MenuPage() {
+const MenuPage: NextPage = () => {
   return (
     <Background initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Logo src={'/logo.svg'} layoutId={'logo'} />
@@ -90,4 +94,6 @@ export default function MenuPage() {
       </MenuList>
     </Background>
   );
-}
+};
+
+export default MenuPage;

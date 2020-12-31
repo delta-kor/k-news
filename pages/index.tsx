@@ -1,5 +1,8 @@
+import { NextPage } from 'next';
 import Header from '../components/molecules/header';
 
-export default function IndexPage() {
+const IndexPage: NextPage = () => {
   return <Header content={'K-NEWS'} />;
-}
+};
+
+export default IndexPage;
