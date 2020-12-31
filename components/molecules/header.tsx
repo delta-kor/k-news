@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import Link from 'next/link';
 import Logo from '../atoms/logo';
 
 interface Props {
@@ -37,9 +38,11 @@ export default class Header extends Component<Props, any> {
   render() {
     return (
       <Layout>
-        <Icon>
-          <Logo />
-        </Icon>
+        <Link href={'/menu'}>
+          <Icon>
+            <Logo />
+          </Icon>
+        </Link>
         <Content layoutId={'title'}>{this.props.content}</Content>
       </Layout>
     );
