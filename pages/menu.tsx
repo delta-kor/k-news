@@ -76,7 +76,7 @@ export default function MenuPage() {
       <Title layoutId={'title'}>K-NEWS</Title>
       <MenuList>
         {menuData.map((data, index) => (
-          <Link href={data.href}>
+          <Link href={data.href} key={index}>
             <MenuItem
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
