@@ -7,6 +7,7 @@ import Logo from '../atoms/logo';
 const Layout = styled.div`
   width: 100%;
   height: 91px;
+  user-select: none;
 `;
 
 const Icon = styled.div`
@@ -15,6 +16,7 @@ const Icon = styled.div`
   height: 43px;
   left: 24px;
   top: 24px;
+  cursor: pointer;
 `;
 
 const Content = styled(motion.p)`

@@ -10,6 +10,7 @@ const Background = styled(motion.div)`
   left: 0;
   right: 0;
   background: #2d7ff9;
+  user-select: none;
 
   @media only screen and (max-height: 710px) {
     zoom: 0.8;
@@ -79,7 +80,7 @@ interface PageProps {
 
 const MenuPage: NextPage<PageProps> = ({ server }) => {
   return (
-    <Background initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <Background initial={{ opacity: server ? 1 : 0 }} animate={{ opacity: 1 }}>
       <Logo src={'/logo.svg'} layoutId={'logo'} />
       <Title layoutId={'title'}>K-NEWS</Title>
       <MenuList>
@@ -88,7 +89,7 @@ const MenuPage: NextPage<PageProps> = ({ server }) => {
             <MenuItem
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={server ? { delay: index * 0.05 } : null}
+              transition={{ delay: index * 0.05 }}
               active={index === 0}
             >
               {data.title}
