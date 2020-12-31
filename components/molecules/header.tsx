@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Logo from '../atoms/logo';
 
-interface Props {
-  content: string;
-}
-
 const Layout = styled.div`
   width: 100%;
   height: 91px;
@@ -33,6 +29,10 @@ const Content = styled(motion.p)`
   line-height: 35px;
   color: #112254;
 `;
+
+interface Props {
+  content: string;
+}
 
 export default class Header extends Component<Props, any> {
   render() {

@@ -73,7 +73,11 @@ const menuData: MenuData[] = [
   { title: 'IT', href: '/it' },
 ];
 
-const MenuPage: NextPage = () => {
+interface PageProps {
+  server: boolean;
+}
+
+const MenuPage: NextPage<PageProps> = ({ server }) => {
   return (
     <Background initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Logo src={'/logo.svg'} layoutId={'logo'} />
@@ -84,7 +88,7 @@ const MenuPage: NextPage = () => {
             <MenuItem
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: index * 0.05 }}
+              transition={server ? { delay: index * 0.05 } : null}
               active={index === 0}
             >
               {data.title}
@@ -94,6 +98,10 @@ const MenuPage: NextPage = () => {
       </MenuList>
     </Background>
   );
+};
+
+MenuPage.getInitialProps = ({ req }) => {
+  return { server: !!req };
 };
 
 export default MenuPage;
