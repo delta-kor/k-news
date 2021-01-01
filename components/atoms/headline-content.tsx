@@ -7,11 +7,19 @@ const Layout = styled.div`
   display: inline-block;
   width: 230px;
   height: 214px;
-  margin: 0 12px 0 0;
+  margin: 16px 12px 0 0;
   background: #ffffff;
   box-shadow: 0 0 16px rgba(108, 141, 255, 0.15);
   border-radius: 16px;
   white-space: normal;
+
+  :first-child {
+    margin: 0 12px 0 24px;
+  }
+
+  :last-child {
+    margin: 0 24px 0 0;
+  }
 `;
 
 const Image = styled.img`

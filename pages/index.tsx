@@ -16,8 +16,7 @@ const Heading = styled.div`
 `;
 
 const HeadlineWrapper = styled.div`
-  margin: 16px 0 0 0;
-  padding: 0 12px 0 24px;
+  height: 262px;
   overflow-x: scroll;
   white-space: nowrap;
   ::-webkit-scrollbar {
