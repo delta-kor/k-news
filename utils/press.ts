@@ -31,6 +31,18 @@ pressMap.set('아이뉴스24', 'inews24');
 pressMap.set('오마이뉴스', 'ohmynews');
 pressMap.set('쿠키뉴스', 'kukinews');
 pressMap.set('프레시안', 'pressian');
+pressMap.set('EBS', 'ebs');
+pressMap.set('JTBC', 'jtbc');
+pressMap.set('KBS', 'kbs');
+pressMap.set('KTV', 'ktv');
+pressMap.set('MBC', 'imbc');
+pressMap.set('MBN', 'mbn');
+pressMap.set('SBS', 'sbsi');
+pressMap.set('SBS Biz', 'sbsbiz');
+pressMap.set('YTN', 'ytn');
+pressMap.set('연합뉴스TV', 'yonhaptv');
+pressMap.set('채널A', 'channela');
+pressMap.set('한국경제TV', 'kedtv');
 
 export default function getPressImage(name: string): string {
   return `/press/${pressMap.get(name)}.png` || null;
