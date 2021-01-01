@@ -1,8 +1,9 @@
 import { Component } from 'react';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import getPressImage from '../../utils/press';
 
-const Layout = styled.div`
+const Layout = styled(motion.div)`
   position: relative;
   display: inline-block;
   width: 230px;
@@ -59,13 +60,18 @@ const Press = styled.img`
 `;
 
 interface Props {
+  index: number;
   data: HeadlineApiItem;
 }
 
 export default class HeadlineContent extends Component<Props, any> {
   render() {
     return (
-      <Layout>
+      <Layout
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: this.props.index * 0.1 }}
+      >
         <Image src={this.props.data.image} />
         <Title>{this.props.data.title}</Title>
         <Press src={getPressImage(this.props.data.press)} />

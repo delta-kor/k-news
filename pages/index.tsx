@@ -46,8 +46,8 @@ const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
       <Header content={'K-NEWS'} />
       <Heading>헤드라인</Heading>
       <HeadlineWrapper>
-        {headlines.map(item => (
-          <HeadlineContent data={item} />
+        {headlines.map((item, index) => (
+          <HeadlineContent data={item} index={index} />
         ))}
       </HeadlineWrapper>
     </div>
