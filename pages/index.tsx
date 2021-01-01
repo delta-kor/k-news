@@ -54,8 +54,8 @@ const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
   );
 };
 
-IndexPage.getInitialProps = async ({ req }) => {
-  if (req) {
+IndexPage.getInitialProps = async () => {
+  if (typeof window === 'undefined') {
     const url = 'http://lt2.kr/api/kn/headline.php';
     const response = await request(url, true);
     const data = response.data as HeadlineApiItem[];
