@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import Header from '../components/molecules/header';
+import axios from 'axios';
 
 const Heading = styled.div`
   position: absolute;
@@ -15,13 +16,23 @@ const Heading = styled.div`
   color: #112254;
 `;
 
-const IndexPage: NextPage = () => {
+interface PageProps {
+  headline: HeadlineApiItem[];
+}
+
+const IndexPage: NextPage<PageProps> = ({ headline }) => {
   return (
     <div>
       <Header content={'K-NEWS'} />
       <Heading>헤드라인</Heading>
     </div>
   );
+};
+
+IndexPage.getInitialProps = async () => {
+  const response = await axios.get('http://lt2.kr/api/kn/headline.php');
+  const data = response.data as HeadlineApiItem[];
+  return { headline: data };
 };
 
 export default IndexPage;
