@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from '../components/molecules/header';
 import HeadlineContent from '../components/atoms/headline-content';
@@ -27,15 +28,25 @@ const HeadlineWrapper = styled.div`
 
 interface PageProps {
   headline: HeadlineApiItem[];
+  server: boolean;
 }
 
-const IndexPage: NextPage<PageProps> = ({ headline }) => {
+const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
+  const [headlines, setHeadlines] = useState(headline);
+
+  useEffect(() => {
+    if (!server) {
+      const url = 'http://lt2.kr/api/kn/headline.php';
+      request(url, false).then(res => setHeadlines(res.data));
+    }
+  }, []);
+
   return (
     <div>
       <Header content={'K-NEWS'} />
       <Heading>헤드라인</Heading>
       <HeadlineWrapper>
-        {headline.map(item => (
+        {headlines.map(item => (
           <HeadlineContent data={item} />
         ))}
       </HeadlineWrapper>
@@ -44,10 +55,13 @@ const IndexPage: NextPage<PageProps> = ({ headline }) => {
 };
 
 IndexPage.getInitialProps = async ({ req }) => {
-  const url = 'http://lt2.kr/api/kn/headline.php';
-  const response = await request(url, !!req);
-  const data = response.data as HeadlineApiItem[];
-  return { headline: data };
+  if (req) {
+    const url = 'http://lt2.kr/api/kn/headline.php';
+    const response = await request(url, true);
+    const data = response.data as HeadlineApiItem[];
+    return { headline: data, server: true };
+  }
+  return { headline: [], server: false };
 };
 
 export default IndexPage;
