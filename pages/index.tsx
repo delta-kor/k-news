@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import Header from '../components/molecules/header';
-import axios from 'axios';
 import HeadlineContent from '../components/atoms/headline-content';
+import request from '../utils/request';
 
 const Heading = styled.div`
   height: 35px;
@@ -43,8 +43,9 @@ const IndexPage: NextPage<PageProps> = ({ headline }) => {
   );
 };
 
-IndexPage.getInitialProps = async () => {
-  const response = await axios.get('http://lt2.kr/api/kn/headline.php');
+IndexPage.getInitialProps = async ({ req }) => {
+  const url = 'http://lt2.kr/api/kn/headline.php';
+  const response = await request(url, !!req);
   const data = response.data as HeadlineApiItem[];
   return { headline: data };
 };
