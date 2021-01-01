@@ -33,5 +33,5 @@ pressMap.set('쿠키뉴스', 'kukinews');
 pressMap.set('프레시안', 'pressian');
 
 export default function getPressImage(name: string): string {
-  return pressMap.get(name) || null;
+  return `/press/${pressMap.get(name)}.png` || null;
 }
