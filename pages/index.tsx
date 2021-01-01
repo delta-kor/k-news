@@ -20,6 +20,7 @@ const HeadlineWrapper = styled.div`
   height: 262px;
   overflow-x: scroll;
   white-space: nowrap;
+
   ::-webkit-scrollbar {
     width: 0;
     background: transparent;
@@ -50,13 +51,13 @@ const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
           <HeadlineContent data={item} index={server || !item ? index : 0} key={index} />
         ))}
       </HeadlineWrapper>
+      <Heading>주요 뉴스</Heading>
     </div>
   );
 };
 
-IndexPage.getInitialProps = async () => {
-  console.log(typeof window);
-  if (typeof window === 'undefined') {
+IndexPage.getInitialProps = async ({ req }) => {
+  if (req) {
     const url = 'http://lt2.kr/api/kn/headline.php';
     const response = await request(url, true);
     const data = response.data as HeadlineApiItem[];

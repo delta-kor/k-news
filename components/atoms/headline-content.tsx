@@ -33,6 +33,8 @@ const Layout = styled(motion.div)`
   box-shadow: 0 0 16px rgba(108, 141, 255, 0.15);
   border-radius: 16px;
   white-space: normal;
+  user-select: none;
+  cursor: pointer;
 
   :first-child {
     margin: 0 12px 0 24px;
