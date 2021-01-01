@@ -27,7 +27,7 @@ const HeadlineWrapper = styled.div`
 `;
 
 interface PageProps {
-  headline: HeadlineApiItem[];
+  headline: (HeadlineApiItem | null)[];
   server: boolean;
 }
 
@@ -47,7 +47,7 @@ const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
       <Heading>헤드라인</Heading>
       <HeadlineWrapper>
         {headlines.map((item, index) => (
-          <HeadlineContent data={item} index={index} />
+          <HeadlineContent data={item} index={index} key={index} />
         ))}
       </HeadlineWrapper>
     </div>
@@ -61,7 +61,7 @@ IndexPage.getInitialProps = async ({ req }) => {
     const data = response.data as HeadlineApiItem[];
     return { headline: data, server: true };
   }
-  return { headline: [], server: false };
+  return { headline: [null, null, null, null], server: false };
 };
 
 export default IndexPage;

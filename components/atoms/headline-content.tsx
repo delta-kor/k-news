@@ -3,6 +3,26 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import getPressImage from '../../utils/press';
 
+const Placeholder = styled(motion.div)`
+  position: relative;
+  display: inline-block;
+  width: 230px;
+  height: 214px;
+  margin: 16px 12px 0 0;
+  background: url('/placeholder/headline.svg');
+  box-shadow: 0 0 16px rgba(108, 141, 255, 0.15);
+  border-radius: 16px;
+  white-space: normal;
+
+  :first-child {
+    margin: 0 12px 0 24px;
+  }
+
+  :last-child {
+    margin: 0 24px 0 0;
+  }
+`;
+
 const Layout = styled(motion.div)`
   position: relative;
   display: inline-block;
@@ -61,21 +81,31 @@ const Press = styled.img`
 
 interface Props {
   index: number;
-  data: HeadlineApiItem;
+  data: HeadlineApiItem | null;
 }
 
 export default class HeadlineContent extends Component<Props, any> {
   render() {
-    return (
-      <Layout
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: this.props.index * 0.1 }}
-      >
-        <Image src={this.props.data.image} />
-        <Title>{this.props.data.title}</Title>
-        <Press src={getPressImage(this.props.data.press)} />
-      </Layout>
-    );
+    if (this.props.data) {
+      return (
+        <Layout
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: this.props.index * 0.1 }}
+        >
+          <Image src={this.props.data.image} />
+          <Title>{this.props.data.title}</Title>
+          <Press src={getPressImage(this.props.data.press)} />
+        </Layout>
+      );
+    } else {
+      return (
+        <Placeholder
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: this.props.index * 0.1 }}
+        />
+      );
+    }
   }
 }
