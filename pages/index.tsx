@@ -47,7 +47,7 @@ const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
       <Heading>헤드라인</Heading>
       <HeadlineWrapper>
         {headlines.map((item, index) => (
-          <HeadlineContent data={item} index={index} key={index} />
+          <HeadlineContent data={item} index={server ? index : 1} key={index} />
         ))}
       </HeadlineWrapper>
     </div>
@@ -55,6 +55,7 @@ const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
 };
 
 IndexPage.getInitialProps = async () => {
+  console.log(typeof window);
   if (typeof window === 'undefined') {
     const url = 'http://lt2.kr/api/kn/headline.php';
     const response = await request(url, true);
