@@ -4,11 +4,14 @@ import getPressImage from '../../utils/press';
 
 const Layout = styled.div`
   position: relative;
+  display: inline-block;
   width: 230px;
   height: 214px;
+  margin: 0 12px 0 0;
   background: #ffffff;
   box-shadow: 0 0 16px rgba(108, 141, 255, 0.15);
   border-radius: 16px;
+  white-space: normal;
 `;
 
 const Image = styled.img`
@@ -31,6 +34,12 @@ const Title = styled.p`
   font-size: 12px;
   line-height: 15px;
   color: #112254;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 `;
 
 const Press = styled.img`
