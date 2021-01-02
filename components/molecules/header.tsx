@@ -40,7 +40,7 @@ export default class Header extends Component<Props, any> {
   render() {
     return (
       <Layout>
-        <Link href={'/menu'}>
+        <Link href={'/menu'} replace={true}>
           <Icon>
             <Logo />
           </Icon>

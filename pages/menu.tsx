@@ -85,7 +85,7 @@ const MenuPage: NextPage<PageProps> = ({ server }) => {
       <Title layoutId={'title'}>K-NEWS</Title>
       <MenuList>
         {menuData.map((data, index) => (
-          <Link href={data.href} key={index}>
+          <Link href={data.href} key={index} replace={index === 0}>
             <MenuItem
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
