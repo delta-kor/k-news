@@ -63,7 +63,7 @@ const IndexPage: NextPage<PageProps> = ({ headline, topNews, server }) => {
       <Heading>주요 뉴스</Heading>
       <TopNewsWrapper>
         {topNewsList.map((item, index) => (
-          <TopNewsContent data={item} key={index} />
+          <TopNewsContent data={item} index={server || !item ? index : 0} key={index} />
         ))}
       </TopNewsWrapper>
     </div>
