@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Header from '../components/molecules/header';
 import HeadlineContent from '../components/atoms/headline-content';
 import request from '../utils/request';
+import ApiUrl from '../utils/url';
 
 const Heading = styled.div`
   height: 35px;
@@ -29,16 +30,18 @@ const HeadlineWrapper = styled.div`
 
 interface PageProps {
   headline: (HeadlineApiItem | null)[];
+  topNews: (TopNewsApiItem | null)[];
   server: boolean;
 }
 
-const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
-  const [headlines, setHeadlines] = useState(headline);
+const IndexPage: NextPage<PageProps> = ({ headline, topNews, server }) => {
+  const [headlineList, setHeadline] = useState(headline);
+  const [topNewsList, setTopNews] = useState(topNews);
 
   useEffect(() => {
     if (!server) {
-      const url = 'http://lt2.kr/api/kn/headline.php';
-      request(url, false).then(res => setHeadlines(res.data));
+      request(ApiUrl.HEADLINE, false).then(data => setHeadline(data));
+      request(ApiUrl.TOP_NEWS, false).then(data => setTopNews(data));
     }
   }, []);
 
@@ -47,7 +50,7 @@ const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
       <Header content={'K-NEWS'} />
       <Heading>헤드라인</Heading>
       <HeadlineWrapper>
-        {headlines.map((item, index) => (
+        {headlineList.map((item, index) => (
           <HeadlineContent data={item} index={server || !item ? index : 0} key={index} />
         ))}
       </HeadlineWrapper>
@@ -58,12 +61,15 @@ const IndexPage: NextPage<PageProps> = ({ headline, server }) => {
 
 IndexPage.getInitialProps = async ({ req }) => {
   if (req) {
-    const url = 'http://lt2.kr/api/kn/headline.php';
-    const response = await request(url, true);
-    const data = response.data as HeadlineApiItem[];
-    return { headline: data, server: true };
+    const headline = await request(ApiUrl.HEADLINE, true);
+    const topNews = await request(ApiUrl.TOP_NEWS, true);
+    return { headline, topNews, server: true };
   }
-  return { headline: [null, null, null, null], server: false };
+  return {
+    headline: [null, null, null, null],
+    topNews: [null, null, null],
+    server: false,
+  };
 };
 
 export default IndexPage;

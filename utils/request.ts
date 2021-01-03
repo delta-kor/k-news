@@ -1,6 +1,12 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
+import ApiUrl from './url';
 
-export default function request(url: string, isSSR: boolean): Promise<AxiosResponse> {
+async function request(url: ApiUrl.HEADLINE, isSSR: boolean): Promise<HeadlineApiItem[]>;
+async function request(url: ApiUrl.TOP_NEWS, isSSR: boolean): Promise<TopNewsApiItem[]>;
+async function request(url: string, isSSR: boolean): Promise<any> {
   const proxy = '/api/proxy?url=';
-  return axios.get(isSSR ? url : proxy + encodeURI(url));
+  const response = await axios.get(isSSR ? url : proxy + encodeURI(url));
+  return response.data;
 }
+
+export default request;
