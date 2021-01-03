@@ -5,6 +5,7 @@ import Header from '../components/molecules/header';
 import HeadlineContent from '../components/atoms/headline-content';
 import request from '../utils/request';
 import ApiUrl from '../utils/url';
+import TopNewsContent from '../components/atoms/top-news-content';
 
 const Heading = styled.div`
   height: 35px;
@@ -26,6 +27,11 @@ const HeadlineWrapper = styled.div`
     width: 0;
     background: transparent;
   }
+`;
+
+const TopNewsWrapper = styled.div`
+  margin: 16px 0;
+  padding: 0 24px 16px 24px;
 `;
 
 interface PageProps {
@@ -55,6 +61,11 @@ const IndexPage: NextPage<PageProps> = ({ headline, topNews, server }) => {
         ))}
       </HeadlineWrapper>
       <Heading>주요 뉴스</Heading>
+      <TopNewsWrapper>
+        {topNewsList.map((item, index) => (
+          <TopNewsContent data={item} key={index} />
+        ))}
+      </TopNewsWrapper>
     </div>
   );
 };
